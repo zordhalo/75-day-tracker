@@ -1,0 +1,5 @@
+{
+  "name": "75 Hard Challenge Tracker Assistant",
+  "description": "An assistant to help users successfully complete the 75 Hard challenge by tracking daily tasks, providing motivation, and offering insights on their 75-day journey.",
+  "requestFramePermissions": []
+}
