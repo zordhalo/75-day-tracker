@@ -1,0 +1,64 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String      @id @default(uuid())
+  email      String      @unique
+  name       String?
+  password   String
+  challenges Challenge[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  @@map("users")
+}
+
+model Challenge {
+  id         String     @id @default(uuid())
+  userId     String
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  startDate  DateTime   @default(now())
+  currentDay Int        @default(0)
+  status     String     @default("active") // active, completed, failed
+  dailyLogs  DailyLog[]
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+
+  @@map("challenges")
+}
+
+model DailyLog {
+  id           String    @id @default(uuid())
+  challengeId  String
+  challenge    Challenge @relation(fields: [challengeId], references: [id], onDelete: Cascade)
+  date         DateTime  @db.Date
+  diet         Boolean   @default(false)
+  workout1     Boolean   @default(false)
+  workout2     Boolean   @default(false)
+  water        Boolean   @default(false)
+  reading      Boolean   @default(false)
+  photo        Boolean   @default(false)
+  photoUrl     String?
+  notes        String?
+  completedAt  DateTime?
+  dietTime     DateTime?
+  workout1Time DateTime?
+  workout2Time DateTime?
+  waterTime    DateTime?
+  readingTime  DateTime?
+  photoTime    DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  @@unique([challengeId, date])
+  @@map("daily_logs")
+}
