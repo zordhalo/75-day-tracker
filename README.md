@@ -1,5 +1,7 @@
 # 75 Day Hard Tracker
 
+[![MCP servers live](https://whobuildsagents.com/badge/advancelabs.dev.svg)](https://whobuildsagents.com/advancelabs.dev)
+
 A comprehensive web application to track and manage the 75 Hard challenge - a transformative mental toughness program that requires completing five daily tasks for 75 consecutive days.
 
 ## 📋 Project Overview
